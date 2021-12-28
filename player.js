@@ -14,9 +14,30 @@ function Player(){
         if(this.state===0){
             this.xVel=0;
         }
+        if(this.state===1){
+            if(this.x>(this.index-1)*laneWidth+laneWidth/2){
+            this.xVel=-10;
+            }else{
+                this.xVel=0;
+                this.state=0;
+                this.index--;
+                this.x=this.index*laneWidth+laneWidth/2;
+
+            }
+        }
+        if(this.state===2){
+            if(this.x<(this.index+1)*laneWidth+laneWidth/2){
+                this.xVel=10;
+                }else{
+                    this.xVel=0;
+                    this.state=0;
+                    this.index++;
+                    this.x=this.index*laneWidth+laneWidth/2;
+    
+                }
+        }
         this.x+=this.xVel;
-        this.x=this.index*laneWidth+laneWidth/2;
-        this.y
+        //this.x=this.index*laneWidth+laneWidth/2;
     }
     this.steerLeft=function(){
         console.log('steerLeft');
@@ -24,7 +45,8 @@ function Player(){
             return;
         }
         else{
-            this.index--;
+           // this.index--;
+           this.state=1;
         }
     }
     this.steerRight=function(){
@@ -33,7 +55,8 @@ function Player(){
             return;
         }
         else{
-            this.index++;
+            this.state=2;
+            //this.index++;
         }
     }
     this.collides=function(obstacle){
