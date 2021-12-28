@@ -16,7 +16,7 @@ function Player(){
         }
         if(this.state===1){
             if(this.x>(this.index-1)*laneWidth+laneWidth/2){
-            this.xVel=-10;
+            this.xVel=-playerXSpeed;
             }else{
                 this.xVel=0;
                 this.state=0;
@@ -27,7 +27,7 @@ function Player(){
         }
         if(this.state===2){
             if(this.x<(this.index+1)*laneWidth+laneWidth/2){
-                this.xVel=10;
+                this.xVel=playerXSpeed;
                 }else{
                     this.xVel=0;
                     this.state=0;

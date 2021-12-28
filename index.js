@@ -1,6 +1,7 @@
 let canvas=document.getElementById('viewPort');
 let context=canvas.getContext('2d');
 let frameCount=0;
+let point=0;
 canvas.setAttribute('width',width);
 canvas.setAttribute('height',height);
 let player;
@@ -20,16 +21,23 @@ function draw(){
       obstacles[i].show();
       obstacles[i].update();
       if(player.collides(obstacles[i])){
-         console.log('collision');
+         //console.log('collision');
+      }
+      if(obstacles[i].pointUp(player)){
+         point++;
+         console.log('Point Up : '+point);
       }
       if(obstacles[i].edge()){
          obstacles.splice(i,1);
       }
     }
-   if(frameCount%120===0){
+   if(frameCount%obstacleFrequency===0){
       obstacles.push(new Obstacle());
    }
    frameCount++;
+   if(frameCount%200===0){
+      obstacleSpeed+=obstacleSpeed*0.2;
+   }
    
 loop();
 }
