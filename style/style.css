@@ -92,3 +92,9 @@ body{
     color: white;
     cursor: pointer;
 }
+#hints{
+    width: 50%;
+    margin: auto;
+    margin-top:5%;
+    text-align: center;
+}
