@@ -1,31 +1,49 @@
+let gameStart=document.getElementById('gameStart');
+let highScoreDiv=document.getElementById('score');
+let startBnt=document.getElementById('start');
 let canvas=document.getElementById('viewPort');
 let context=canvas.getContext('2d');
 let scoreboard=document.getElementById('scoreboard');
 let gameover=document.getElementById('gameOver');
 let finalScore=document.getElementById('finalScore');
+let currentHS=document.getElementById('currentHS');
 let restartBtn=document.getElementById('restart');
 let frameCount;
 let point;
+let highScore;
 canvas.setAttribute('width',width);
 canvas.setAttribute('height',height);
 let player;
 let obstacles;
 let animation;
-let gameState=1;
+let gameState=0;
+let road;
 
-function start(){
+let temp=localStorage.getItem('highScore');
+   if(temp){
+      highScore=temp;
+   }
+   else{
+      highScore=0;
+   }
+   highScoreDiv.innerHTML=`High Score: ${highScore}`;
 
-}
+startBnt.addEventListener('click',function(){
+   gameState=1;
+   gameStart.style.display='none';
+   setup();
+})
 
 function setup(){
+   road=new Road();
    point=0;
    frameCount=0;
    obstacles=[];
+   obstacleSpeed=5;
    scoreboard.style.display='block';
-   scoreboard.innerHTML=`Score: ${point}`;
+   scoreboard.innerHTML=`${point}`;
    canvas.style.display='block';
-player=new Player();
-// console.log(player);
+   player=new Player();
 obstacles.push(new Obstacle());
 loop();
    
@@ -33,8 +51,7 @@ loop();
 
 
 function draw(){
-    context.fillStyle='white';
-    context.fillRect(0,0,width,height);
+   road.moveRoad();
     player.show();
     player.update();
     for(let i=obstacles.length-1;i>=0;i--){
@@ -48,8 +65,7 @@ function draw(){
       }
       if(obstacles[i].pointUp(player)){
          point++;
-         scoreboard.innerHTML=`Score: ${point}`;
-         //console.log('Point Up : '+point);
+         scoreboard.innerHTML=`${point}`;
       }
       if(obstacles[i].edge()){
          obstacles.splice(i,1);
@@ -72,7 +88,6 @@ loop();
 function loop(){
    animation= window.requestAnimationFrame(draw);
 }
-setup();
 window.addEventListener('keydown',function(e){
    if(e.key==='a'){
       player.steerLeft();
@@ -92,10 +107,19 @@ function gameOver(){
    scoreboard.style.display='none';
    finalScore.innerHTML=`Your Score: ${point}`;
    canvas.style.display='none';
+   if(point>highScore){
+      highScore=point;
+      localStorage.setItem('highScore',point);
+   }
+   else{
+      localStorage.setItem('highScore',highScore);
+   }
+   currentHS.innerHTML=`High Score: ${highScore}`;
 }
 restartBtn.addEventListener('click',function(){
    console.log('restart');
    gameState=1;
    gameover.style.display='none';
    setup();
-})
+});
+
