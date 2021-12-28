@@ -2,15 +2,37 @@
 .container{
     position: relative;
 }
+#gameStart{
+    width: 30%;
+    display: none;
+    background-color: white;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+    padding: 40px;
+    border: 1px solid black;
+    font-size: 40px;
+    z-index: 15;
+}
+#start{
+    display: block;
+    border-radius: 25px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    width: 60%;
+    padding: 5px;
+}
 #viewPort{
     border:1px solid black;
-    display: block;
+    display: none;
     margin: 0 auto;
     z-index: 0;
 }
 #scoreboard{
     width: 15%;
-    display: block;
+    display: none;
     background-color: white;
     margin: auto;
     text-align: center;

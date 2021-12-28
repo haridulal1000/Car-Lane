@@ -2,7 +2,7 @@ let canvas=document.getElementById('viewPort');
 let context=canvas.getContext('2d');
 let scoreboard=document.getElementById('scoreboard');
 let gameover=document.getElementById('gameOver');
-let finalScore=document.getElementById('score');
+let finalScore=document.getElementById('finalScore');
 let restartBtn=document.getElementById('restart');
 let frameCount;
 let point;
@@ -12,6 +12,10 @@ let player;
 let obstacles;
 let animation;
 let gameState=1;
+
+function start(){
+
+}
 
 function setup(){
    point=0;
@@ -84,8 +88,9 @@ function start(){
 
 function gameOver(){
    gameover.style.display='block';
-   finalScore.innerHTML=`Your Score is: ${point}`;
+   restartBtn.style.display='block';
    scoreboard.style.display='none';
+   finalScore.innerHTML=`Your Score: ${point}`;
    canvas.style.display='none';
 }
 restartBtn.addEventListener('click',function(){
