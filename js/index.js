@@ -114,7 +114,6 @@ function gameOver() {
   currentHS.innerHTML = `High Score: ${highScore}`;
 }
 restartBtn.addEventListener("click", function () {
-  console.log("restart");
   gameState = 1;
   gameover.style.display = "none";
   setup();
